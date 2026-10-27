@@ -1,0 +1,30 @@
+{% extends 'vault/base.html' %}
+
+{% block content %}
+
+<h1>{{ entry.website }}</h1>
+
+{% if values %}
+
+    <p>Account username: {{ values.username }}</p>
+    <p>Account password: {{ values.password }}</p>
+
+{% else %}
+
+    <p>Enter your master password to view this entry.</p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Unlock</button>
+    </form>
+
+{% endif %}
+
+<p>
+    <a href="{% url 'vault' %}">Back to vault</a>
+</p>
+
+{% endblock %}

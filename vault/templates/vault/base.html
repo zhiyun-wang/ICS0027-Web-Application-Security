@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Password Manager</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 760px;
+            margin: 35px auto;
+            padding: 0 18px;
+            line-height: 1.5;
+            color: #202731;
+        }
+
+        nav {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 12px;
+        }
+
+        nav form {
+            margin-left: auto;
+        }
+
+        a {
+            color: #174f8b;
+        }
+
+        input {
+            display: block;
+            padding: 8px;
+            width: 100%;
+            max-width: 420px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px 14px;
+            cursor: pointer;
+        }
+
+        ul.errorlist {
+            color: #b32020;
+        }
+
+        .entry {
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .helptext {
+            display: block;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .messages {
+            color: #176736;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="{% url 'vault' %}">Password Manager</a>
+
+        {% if user.is_authenticated %}
+            <span>{{ user.username }}</span>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Log in</a>
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+    </nav>
+
+    {% for message in messages %}
+        <p class="messages">{{ message }}</p>
+    {% endfor %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

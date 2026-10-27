@@ -1,0 +1,29 @@
+{% extends 'vault/base.html' %}
+
+{% block content %}
+
+<h1>My vault</h1>
+
+<p>
+    <a href="{% url 'new' %}">Add entry</a>
+</p>
+
+{% for entry in entries %}
+
+    <div class="entry">
+        <strong>{{ entry.website }}</strong>
+
+        <br>
+
+        <a href="{% url 'detail' entry.id %}">View</a> |
+        <a href="{% url 'edit' entry.id %}">Edit</a> |
+        <a href="{% url 'delete' entry.id %}">Delete</a>
+    </div>
+
+{% empty %}
+
+    <p>No entries yet.</p>
+
+{% endfor %}
+
+{% endblock %}

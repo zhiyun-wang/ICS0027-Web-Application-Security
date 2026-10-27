@@ -1,0 +1,4 @@
+Django>=5.2,<5.3
+argon2-cffi>=23.1,<26
+cryptography>=42,<47
+Werkzeug>=3,<4

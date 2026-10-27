@@ -31,16 +31,17 @@ encrypt sensitive vault data on the server before storing it in the database.
 
 ## Run locally
 
-The repository currently contains the Checkpoint 1 design but no runnable
-application. After the Django project is initialized, the intended commands
-from the repository root are:
+To run the application locally, use the following commands from the repository root:
 
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python manage.py migrate
-python manage.py runserver 127.0.0.1:8000
+python dev_https.py
 ```
 
-The application will then be available at http://127.0.0.1:8000/.
+The application will then be available at https://localhost:8443/.
+
+The browser will show a warning because the development server uses a
+self-signed certificate. Continue to localhost to access the application.
